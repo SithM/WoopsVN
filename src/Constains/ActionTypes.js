@@ -1,0 +1,2 @@
+export const SIGNUP_ACCOUNT = "SIGNUP_ACCOUNT";
+export const SIGNIN_ACTION = "SIGNIN_ACTION";

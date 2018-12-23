@@ -1,0 +1,19 @@
+.chat-box{
+    position: fixed !important;
+    width: 25%;
+    height: 90vh;
+    top: 64px;
+    min-height: 87vh;
+}
+
+.search-box-friends{
+    display: block;
+    position: absolute !important;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+}
+
+.search-box-friends > Input {
+    border-radius: 0 !important;
+}

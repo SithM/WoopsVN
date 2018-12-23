@@ -1,0 +1,14 @@
+@import url('./_font.scss');
+@import 'ThemeTemplate/theme';
+@import 'Base/ScrollBar.scss';
+@import 'Base/Selection.scss';
+@import 'Base/background-color.scss';
+@import '~antd/dist/antd.css';
+@import 'MiniFramework/mini-framework.scss';
+@import 'Component/all-component.scss';
+@import 'Vendor/FixedAntd/card-action.scss';
+
+*{
+    padding: 0;
+    margin: 0;
+}
