@@ -1,9 +1,41 @@
 import React from "react";
-import { Avatar, Tooltip, Row, Col, Icon } from "antd";
+import { Avatar, Tooltip, Row, Col, Icon, Modal, message } from "antd";
 import moment from "moment";
+import { deleteWoopsRequest, editWoopsRequest } from "../../Actions/index";
+import { connect } from "react-redux";
+
+const confirm = Modal.confirm;
+const successDelete = () => {
+  message.success("Delete post successfully!");
+};
+const successEdit = () => {
+  message.success("Edit post successfully!");
+};
 
 class HeaderPost extends React.Component {
+  state = {
+    value: ""
+  };
+
   render() {
+    let key = this.props.id;
+    let idToken = this.props.id_token;
+    let { content } = this.props;
+
+    let showDeleteConfirm = () => {
+      confirm({
+        title: "Are you sure delete this post?",
+        content: null,
+        okText: "Delete",
+        okType: "danger",
+        cancelText: "No",
+        onOk() {
+          successDelete();
+          //this.props.onDeleteWoop(idToken, key);
+          console.log("OK");
+        }
+      });
+    };
     return (
       <div>
         <Row>
@@ -27,9 +59,10 @@ class HeaderPost extends React.Component {
                 <span>
                   <Icon type="edit" />
                 </span>
-              </Tooltip>&nbsp;
+              </Tooltip>
+              &nbsp;
               <Tooltip title="Delete post" className="mg-0pd-0">
-                <span>
+                <span onClick={showDeleteConfirm}>
                   <Icon type="close" />
                 </span>
               </Tooltip>
@@ -41,4 +74,22 @@ class HeaderPost extends React.Component {
   }
 }
 
-export default HeaderPost;
+const mapStateToProps = state => {
+  return state;
+};
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    onDeleteWoop: (idToken, key) => {
+      dispatch(deleteWoopsRequest(idToken, key));
+    },
+    onEditWoop: (idToken, key, content) => {
+      dispatch(editWoopsRequest(idToken, key, content));
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HeaderPost);

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form, Input, Select, Checkbox, Button, Icon } from "antd";
 import { Link } from "react-router-dom";
-import { actSignUpAccount } from "../../Actions";
+import { signUpRequest } from "../../Actions";
 import { connect } from "react-redux";
 
 const FormItem = Form.Item;
@@ -26,7 +26,7 @@ class RegistrationForm extends Component {
         let dataUser = {
           email: values.email,
           password: values.password,
-          phone: `+${values.prefix}${values.phone}`
+          phone_number: `+${values.prefix}${values.phone}`
         };
         // this.setState({
         //   data: data
@@ -222,7 +222,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch, props) => {
   return {
     onSignUpAccount: dataUser => {
-      dispatch(actSignUpAccount(dataUser));
+      dispatch(signUpRequest(dataUser));
     }
   };
 };

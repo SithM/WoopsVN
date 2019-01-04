@@ -1,2 +1,5 @@
 export const SIGNUP_ACCOUNT = "SIGNUP_ACCOUNT";
-export const SIGNIN_ACTION = "SIGNIN_ACTION";
+export const SIGNIN_ACCOUNT = "SIGNIN_ACCCOUNT";
+export const WOOPS_CREATE = "WOOPS_CREATE";
+export const WOOPS_EDIT = "WOOPS_EDIT";
+export const WOOPS_DELETE = "WOOPS_DELETE";

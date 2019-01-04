@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Form, Icon, Input, Button, Checkbox, Select } from "antd";
 import ForgotPasswordComponent from "./ForgotPasswordComponent";
 import "./custom-style.scss";
+import { signInRequest } from "../../Actions/index";
+import { connect } from "react-redux";
 
 //define Tag antd
 const FormItem = Form.Item;
@@ -15,6 +17,12 @@ class NormalLoginForm extends Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log("Received values of form: ", values);
+        let data = {
+          email: values.email,
+          password: values.password
+        };
+        //action
+        this.props.onSignInAccount(data);
       }
     });
   };
@@ -28,22 +36,25 @@ class NormalLoginForm extends Component {
 
         <Form onSubmit={this.handleSubmit} className="login-form mgt-1">
           <FormItem hasFeedback>
-            {getFieldDecorator("userName", {
+            {getFieldDecorator("email", {
               rules: [
                 {
+                  type: "email",
+                  message: "The input is not valid E-mail!"
+                },
+                {
                   required: true,
-                  message: "Please input your username!",
-                  validateStatus: "error"
+                  message: "Please input your E-mail!"
                 }
               ]
             })(
               <Input
                 size="large"
                 prefix={
-                  <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+                  <Icon type="mail" style={{ color: "rgba(0,0,0,.25)" }} />
                 }
-                placeholder="Username"
-                id="error"
+                type="email"
+                placeholder="Email"
               />
             )}
           </FormItem>
@@ -114,4 +125,19 @@ class NormalLoginForm extends Component {
 
 const LoginComponent = Form.create()(NormalLoginForm);
 
-export default LoginComponent;
+const mapStateToProps = state => {
+  return state;
+};
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    onSignInAccount: dataUser => {
+      dispatch(signInRequest(dataUser));
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginComponent);
